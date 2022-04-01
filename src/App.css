@@ -19,7 +19,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -35,4 +34,37 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.container {
+  display: flex;
+  justify-content: end;
+}
+
+.nav--menu {
+  list-style: none;
+  display: inline-flex;
+  gap: 10px;
+}
+
+.form--search {
+  font-family: sans-serif;
+  border-radius: 5px;
+  border: 1px solid #d5d4d8;
+  text-indent: 5px;
+  width: 60%;
+  height: 30px;
+}
+
+.img--container {
+  display: flex;
+  width: 50%;
+  margin-top: 5%;
+  gap: 40px;
+}
+
+.img--container img {
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ffffff;
 }
