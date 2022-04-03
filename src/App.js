@@ -1,13 +1,13 @@
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
+import MapView from "./components/MapView"
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <Header />
+      <MapView />
     </div>
   );
 }
