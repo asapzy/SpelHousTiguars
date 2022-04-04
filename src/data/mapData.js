@@ -1,3 +1,4 @@
+// GeoJSON Data
 export default {
   type: "FeatureCollection",
   features: [

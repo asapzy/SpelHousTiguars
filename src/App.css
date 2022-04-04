@@ -55,6 +55,8 @@
 .popup img{
   width: 100px;
   height: 100px;
+  display: flex;
+  margin-top: 5px;
 }
 
 #map{

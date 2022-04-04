@@ -4,7 +4,9 @@ import { MapContainer, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
 import mapInfo from "../data/mapData";
 
 export default function MapView() {
+  // Position of San Francisco
   const position = [37.773972, -122.431297];
+  // District Positions
   const positions = [
     {
       name: "American Indian Cultural District",
@@ -62,6 +64,7 @@ export default function MapView() {
     },
   ];
 
+  // Positions to Marker
   const markerLocations = positions.map((loc) => {
     return (
       <Marker position={loc.location}>
