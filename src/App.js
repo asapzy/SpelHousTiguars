@@ -1,6 +1,3 @@
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import MapView from "./components/MapView";
 import Home from "./components/Home";
 import About from "./components/About";
 import Team from "./components/Team";

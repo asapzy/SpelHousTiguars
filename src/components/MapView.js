@@ -1,63 +1,93 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "../App.css";
-import Map, { Source, Layer } from "react-map-gl";
 import { MapContainer, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
 import mapInfo from "../data/mapData";
 
 export default function MapView() {
-  //  latitude of San Francisco, CA, USA is 37.773972, and the longitude is -122.431297
   const position = [37.773972, -122.431297];
-  const [mapData, setMapData] = useState({});
-  const urlPrefix = "https://cors-anywhere.herokuapp.com/";
-  const corsPrefix = "https://dry-caverns-88992.herokuapp.com/";
-  useEffect(() => {
-    fetch(`http://localhost:5000/data`, {
-      headers: {
-        Origin: corsPrefix,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setMapData(data);
-        console.log(`Data: ${data}`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log(mapData);
-  }, []);
+  const positions = [
+    {
+      name: "American Indian Cultural District",
+      location: [37.763243322937385, -122.42269865931524],
+      oldImg: "https://i.ibb.co/fSDSR5V/Original-Indian-Center-on-16th-Street-San-Francisco-Chronicle-1970-06-17-4-1.png",
+      newImg: "https://i.ibb.co/NLWxysh/mi4.jpg"
+    },
+    {
+      name: "Sunset Chinese Cultural District",
+      location: [37.734083262403665, -122.49857547656885],
+      oldImg: "https://i.ibb.co/5L30b7g/Kie1-Colonial-Creamery-2-1140x889.jpg",
+      newImg: "https://i.ibb.co/j3WSdBc/download.jpg"
+    },
+    {
+      name: "Japantown Cultural District",
+      location: [37.78433226695286, -122.4244838335995],
+      oldImg: "https://i.ibb.co/swnp2n2/Hirahara-house-244.jpg",
+      newImg: "https://i.ibb.co/HBmbcS5/newjapan.jpg"
+    },
+    {
+      name: "SoMa Pilipinas - Filipino Cultural District",
+      location: [37.7755865688895, -122.41868358994635],
+      oldImg: "https://i.ibb.co/FWSTnPM/Old-Manilatown001-4525-4c-768x561.jpg",
+      newImg: "https://i.ibb.co/5RkjLLk/soma.jpg"
+    },
+    {
+      name: "Castro Cultural District",
+      location: [37.76367114413134, -122.43470431359836],
+      oldImg: "https://i.ibb.co/f0NrnXb/rawImage.jpg",
+      newImg: "https://i.ibb.co/ZWPj0zR/download-1.jpg"
+    },
+    {
+      name: "Leather & LGBTQ Cultural District",
+      location: [37.7698150789102, -122.41775319361506],
+      oldImg: "https://i.ibb.co/3pMqgLb/Fillmore-redevelopment-by-SF-Redevelopment-Agency-web.jpg",
+      newImg: "https://i.ibb.co/nkhXc6x/download.jpg"
+    },
+    {
+      name: "Calle 24 Latino Cultural District",
+      location: [37.74831671907797, -122.4105460676303],
+      oldImg: "https://i.ibb.co/x5LXMmT/24th-and-Shotwell-1982-Dave-Glass-3624687575-dbf307b3d8-o.jpg",
+      newImg: "https://i.ibb.co/ZHwKsbP/download.jpg"
+    },
+    {
+      name: "Compton's Transgender Cultural District",
+      location: [37.78434926938542, -122.40930917956707],
+      oldImg: "https://i.ibb.co/mh4tX8P/comptons-cafeteria.jpg",
+      newImg: "https://i.ibb.co/jLV0jrs/download-1.jpg"
+    },
+    {
+      name: "African American Arts and Cultural District",
+      location: [37.734783497043146, -122.37516625415854],
+      oldImg: "https://i.ibb.co/3pMqgLb/Fillmore-redevelopment-by-SF-Redevelopment-Agency-web.jpg",
+      newImg: "https://i.ibb.co/SXd84wd/download.jpg"
+    },
+  ];
+
+  const markerLocations = positions.map((loc) => {
+    return (
+      <Marker position={loc.location}>
+        <Popup className="popup">
+          {loc.name}
+          <img
+            src={loc.oldImg}
+            alt={`Old Image of ${loc.name}`}
+          />
+          <img
+            src={loc.newImg}
+            alt={`New Image of ${loc.name}`}
+          />
+        </Popup>
+      </Marker>
+    );
+  });
+
   return (
     <MapContainer id="map" center={position} zoom={14} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={position}>
-        <Popup className="popup">
-          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
-          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
-          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
-          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
-          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
-          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
-          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
-          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
-        </Popup>
-      </Marker>
+      {markerLocations}
       <GeoJSON attribution="&copy; credits due..." data={mapInfo} />
     </MapContainer>
-    // <Map
-    //   initialViewState={{
-    //     longitude: -122.4,
-    //     latitude: 37.8,
-    //     zoom: 6,
-    //   }}
-    //   style={{ width: 600, height: 400 }}
-    //   mapStyle="mapbox://styles/mapbox/streets-v9"
-    //   mapboxAccessToken="sk.eyJ1IjoiemFyY2hpYmFsZDEwMSIsImEiOiJjbDFpcTRmd2kwazluM2lvOWttZjFxNmZsIn0.FRuiJ9SqYWrzbrQ0rWwSuw"
-    // >
-    //   {/* <Source type="geojson"></Source> */}
-    // </Map>
   );
 }
