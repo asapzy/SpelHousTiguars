@@ -11,6 +11,12 @@ The bot uses the instaloader module for fetching posts.
      Kyle Brown
      Kevin Drew
      Abiodun Scott
+     
+## How to get started on this project
+1. Click the green `code` button and copy the link or click [here]()
+2. Go to your IDE and within there do the command `git clone <linkCopied>`
+3. Go into the spelhousetiguars directory and use `npm start`
+    
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
