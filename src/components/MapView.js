@@ -3,21 +3,29 @@ import axios from "axios";
 import "../App.css";
 import Map, { Source, Layer } from "react-map-gl";
 import { MapContainer, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
-import mapInfo from "../data/mapData"
+import mapInfo from "../data/mapData";
 
 export default function MapView() {
   //  latitude of San Francisco, CA, USA is 37.773972, and the longitude is -122.431297
   const position = [37.773972, -122.431297];
-  const [mapData, setMapData] = useState([{}]);
+  const [mapData, setMapData] = useState({});
   const urlPrefix = "https://cors-anywhere.herokuapp.com/";
   const corsPrefix = "https://dry-caverns-88992.herokuapp.com/";
   useEffect(() => {
-    fetch(`http://localhost:5000/data`)
+    fetch(`http://localhost:5000/data`, {
+      headers: {
+        Origin: corsPrefix,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setMapData(data);
         console.log(`Data: ${data}`);
+      })
+      .catch((error) => {
+        console.log(error);
       });
+    console.log(mapData);
   }, []);
   return (
     <MapContainer id="map" center={position} zoom={14} scrollWheelZoom={false}>
@@ -26,8 +34,15 @@ export default function MapView() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={position}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
+        <Popup className="popup">
+          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
+          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
+          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
+          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
+          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
+          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
+          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
+          <img src="https://images.unsplash.com/photo-1508162172419-c47fcdf7d2ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="Here"/>
         </Popup>
       </Marker>
       <GeoJSON attribution="&copy; credits due..." data={mapInfo} />

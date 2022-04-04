@@ -10,9 +10,15 @@ export default function Navbar() {
     <>
       <nav className="navbar--container">
         <ul className="nav--menu">
-          <li>Home</li>
-          <li>About</li>
-          <li>Our Team</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/team">Our Team</Link>
+          </li>
         </ul>
       </nav>
     </>
