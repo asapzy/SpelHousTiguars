@@ -24,24 +24,33 @@ identifier = "5xmc-5bjj"
 client = Socrata(domain, token)
 results = client.get(identifier)
 df = pd.DataFrame(results)
+# for i in df['the_geom'].values:
+#     print(f'Data Pont: {i}')
+#     print('\n')
+print(df['district_name'][0])
 mapData = dict(df['the_geom'])
 
-# class MyServer(BaseHTTPRequestHandler):
-#     def do_POST(self):
-#         content_length = int(self.headers['Content-Length'])
-#         post_data = self.rfile.read(content_length)
-#         self._set_headers()
-#         self.wfile.write("<html><body><p>POST!</p><p>%s</p></body></html>"
-#                             .encode('utf-8') % post_data)
-
+realData = {"type" : "FeatureCollection",
+            "features" : [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        df.columns[1]: df['district_name'][0],
+                        df.columns[2]: df['designation_date'][0]
+                    },
+                    "geometry": {
+                        "type": df['the_geom'][0]["type"],
+                        "coordinates": df['the_geom'][0]["coordinates"],
+                    },
+                },
+            ]
+}
 
 app = Flask(__name__)
 
 @app.route("/data")
 def data():
-    # Headers = {"Content-Type":"text/plain"}
-    data = json.dumps(mapData)
-    print(type(data))
+    data = json.dumps(realData)
     return data
     # r = requests.post('http://localhost:5000/data', json=mapData)
     # print(r.json())
