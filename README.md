@@ -1,3 +1,8 @@
+# Virtual Preservation Project
+Our project uses an instagram bot to download the top 3 posts based on the hashtags for districts in San Francisco, CA.
+On the website, when teh user clicks on a marker on the map, they are linked to another webpage with the top 3 posts in that district to see what buildings and lifestyle there are like. 
+The bot uses the instaloader module for fetching posts
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
