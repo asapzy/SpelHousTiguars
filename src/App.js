@@ -1,14 +1,39 @@
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
-import MapView from "./components/MapView"
+import MapView from "./components/MapView";
+import Home from "./components/Home";
+import About from "./components/About";
+import Team from "./components/Team";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <MapView />
-    </div>
+    <Router>
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/team">Our Team</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
